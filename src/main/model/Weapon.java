@@ -6,31 +6,35 @@ public class Weapon extends Card {
     private int durability;
 
     public Weapon() {
-
+        this.type = "Weapon";
     }
 
     //MODIFIES: THIS
     //EFFECTS: sets attack to inputted value
     public void setAttack(int attack) {
-
+        weaponAttack = attack;
     }
 
     //EFFECTS: returns value of attack
     public Integer getAttack() {
-        return 0;
+        return weaponAttack;
     }
 
     //MODIFIES: THIS
     //EFFECTS: sets durability to inputted value
     public void setHealth(int health) {
+        durability = health;
 
     }
 
     //EFFECTS: returns value of durability
     public Integer getHealth() {
-        return 0;
+        return durability;
     }
 
+    /*
+    -----------------------------------------------------------------------------------------------------------------
+     */
     @Override
     public void setTribe(String tribe) {
 

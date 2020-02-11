@@ -16,67 +16,72 @@ public abstract class Card {
     //MODIFIES: THIS
     //EFFECTS: Sets cost of Card
     public void setCost(int cost) {
+        this.cost = cost;
 
     }
 
     //EFFECTS: returns cost
     public int getCost() {
-        return 0;
+        return cost;
     }
 
     //MODIFIES: THIS
     //EFFECTS: Sets description of Card
     public void setDesc(String desc) {
+        this.description = desc;
 
     }
 
     //EFFECTS: returns description
     public String getDesc() {
-        return "";
+        return description;
     }
 
     //MODIFIES: THIS
     //EFFECTS: Sets type of Card
     public void setType(String type) {
-
+        this.type = type;
     }
 
     //EFFECTS: returns type
     public String getType() {
-        return "";
+        return type;
     }
 
     //MODIFIES: THIS
     //EFFECTS: Sets name of Card
     public void setName(String name) {
+        this.name = name;
 
     }
 
     //EFFECTS: returns name
     public String getName() {
-        return "";
+        return name;
     }
 
     //MODIFIES: THIS
     //EFFECTS: Sets class of card
     public void setClass(String gameClass) {
+        this.gameClass = gameClass;
 
     }
 
     //EFFECTS: returns game class of card
-    public String gettClass() {
-        return "";
+    public String getGameClass() {
+        return gameClass;
     }
 
     //MODIFIES: THIS
     //EFFECTS: Sets rarity of card
     public void setRarity(String rarity) {
+        this.rarity = rarity;
 
     }
 
     //EFFECTS: returns rarity of card
     public String getRarity() {
-        return "";
+        return rarity;
     }
 
     //MODIFIES: THIS
@@ -113,8 +118,4 @@ public abstract class Card {
 
     //EFFECTS: returns value of reward description
     public abstract String getRewardDesc();
-
-
-
-
 }

@@ -4,43 +4,49 @@ public class Minion extends Card {
     Card minion;
 
     public Minion() {
-        minion = new Minion();
-
+        this.type = "Minion";
     }
 
     //MODIFIES: THIS
     //EFFECTS: sets attack to inputted value
     public void setAttack(int attack) {
-
+        this.attack = attack;
     }
 
     //EFFECTS: returns value of attack
     public Integer getAttack() {
-        return 0;
+        return attack;
     }
 
     //MODIFIES: THIS
     //EFFECTS: sets health to inputted value
     public void setHealth(int health) {
+        this.health = health;
 
     }
 
     //EFFECTS: returns value of health
     public Integer getHealth() {
-        return 0;
+        return health;
     }
 
     //MODIFIES: THIS
     //EFFECTS: sets tribe to inputted value
     public void setTribe(String tribe) {
+        this.tribe = tribe;
 
     }
 
     //EFFECTS: returns value of tribe
     public String getTribe() {
-        return "";
+        return tribe;
     }
 
+    /*
+    *
+    * ----------------------------------------------------------------------------------------------------------------
+    *
+     */
     @Override
     public void setRewardCost(int rewardCost) {
 
@@ -48,7 +54,7 @@ public class Minion extends Card {
 
     @Override
     public Integer getRewardCost() {
-        return 0;
+        return null;
     }
 
     @Override

@@ -4,10 +4,12 @@ public class Spell extends Card {
     Card spell;
 
     public Spell() {
-        spell = new Spell();
-        spell.setType("Spell");
+        this.type = "Spell";
     }
 
+    /*
+    -----------------------------------------------------------------------------------------------------------------
+     */
     @Override
     public void setAttack(int attack) {
 
