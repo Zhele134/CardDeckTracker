@@ -272,6 +272,8 @@ public class ConsoleApp {
                 break;
                 case "v": viewDeck();
                 break;
+                case "d": viewDustCost();
+                break;
                 case "b": deckRunning = false;
                 break;
                 default: System.out.println("Invalid output, try again");
@@ -286,6 +288,7 @@ public class ConsoleApp {
         System.out.println("\ta -> Add Card");
         System.out.println("\tr -> Remove Card");
         System.out.println("\tv -> View Deck");
+        System.out.println("\td -> View Dust Cost of Deck");
         System.out.println("\tb -> Go Back");
     }
 
@@ -360,6 +363,10 @@ public class ConsoleApp {
         for (CardInDeck card : deck.retrieveCards()) {
             System.out.println(card.getCard().getName() + " x " + card.getCopies());
         }
+    }
+
+    private void viewDustCost() {
+        System.out.println("This deck currently costs " + deck.getDustCost() + " dust to create.");
     }
 
 
