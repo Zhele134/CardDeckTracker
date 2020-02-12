@@ -9,6 +9,7 @@ import java.util.*;
 public class ConsoleApp {
     private Scanner input;
     private HashMap<String, Card> library;
+    private Deck deck;
 
     public ConsoleApp() {
         startApp();
@@ -19,11 +20,12 @@ public class ConsoleApp {
         input = new Scanner(System.in);
         String command = null;
         boolean stillRunning = true;
+        deck = new Deck();
         library = new HashMap<String, Card>();
 
         while (stillRunning) {
             displayStartMenu();
-            command = input.next();
+            command = input.nextLine();
             command = command.toLowerCase();
 
             if (command.equals("q")) {
@@ -56,7 +58,7 @@ public class ConsoleApp {
         Card card;
         while (runningCard) {
             displayCardTypes();
-            String type = input.next().toLowerCase();
+            String type = input.nextLine().toLowerCase();
             switch (type) {
                 case "m": card = new Minion();
                     chooseStats(card);
@@ -77,11 +79,6 @@ public class ConsoleApp {
         }
     }
 
-    private void makeDeck() {
-        boolean deckRunning = true;
-
-    }
-
     private void displayCardTypes() {
         System.out.println("\nWhat type of card are you making?");
         System.out.println("\tm -> Minion");
@@ -91,14 +88,9 @@ public class ConsoleApp {
         System.out.println("\tb -> Go Back To Previous Menu");
     }
 
-
-
-
-
-
     private void chooseStats(Card card) {
         System.out.println("Input class");
-        String gameClass = input.next().toLowerCase();
+        String gameClass = input.nextLine().toLowerCase();
         card.setClass(gameClass);
         if (card instanceof Minion) {
             card.setType("Minion");
@@ -176,7 +168,7 @@ public class ConsoleApp {
         String desc = input.nextLine();
         card.setDesc(desc);
         System.out.println("Input Rarity");
-        String rarity = input.next();
+        String rarity = input.nextLine();
         card.setRarity(rarity);
     }
 
@@ -202,7 +194,7 @@ public class ConsoleApp {
         String hpDesc = input.nextLine();
         card.setRewardDesc(hpDesc);
         System.out.println("Input Rarity");
-        String rarity = input.next();
+        String rarity = input.nextLine();
         card.setRarity(rarity);
     }
 
@@ -268,8 +260,106 @@ public class ConsoleApp {
         }
     }
 
-    private void displayDeckMenu() {
+    private void makeDeck() {
+        boolean deckRunning = true;
+        while (deckRunning) {
+            displayDeckMenu();
+            String choice = input.nextLine().toLowerCase();
+            switch (choice) {
+                case "a": addCardToDeck();
+                break;
+                case "r": removeCardFromDeck();
+                break;
+                case "v": viewDeck();
+                break;
+                case "b": deckRunning = false;
+                break;
+                default: System.out.println("Invalid output, try again");
+            }
 
+        }
+
+    }
+
+    private void displayDeckMenu() {
+        System.out.println("\nChoose what to do with the deck");
+        System.out.println("\ta -> Add Card");
+        System.out.println("\tr -> Remove Card");
+        System.out.println("\tv -> View Deck");
+        System.out.println("\tb -> Go Back");
+    }
+
+    private void addCardToDeck() {
+        boolean addRunning = true;
+        while (addRunning) {
+            System.out.println("\n Input name of card you want to add");
+            String cardName = input.nextLine();
+            System.out.println("Input number of copies you want to add");
+            int cardCopies = input.nextInt();
+            input.nextLine();
+            if (library.containsKey(cardName)) {
+                if (deck.addCard(library.get(cardName), cardCopies)) {
+                    System.out.println("Card(s) added successfully");
+                    addRunning = askAddAnother();
+                } else {
+                    System.out.println("Can't add cards");
+                    addRunning = askAddAnother();
+                }
+            } else {
+                System.out.println("Card not found in library, try again");
+                addRunning = askAddAnother();
+            }
+        }
+    }
+
+    private boolean askAddAnother() {
+        while (true) {
+            System.out.println("\nAdd another card? (Type y or n)");
+            String decision = input.nextLine().toLowerCase();
+            if (decision.equals("y")) {
+                return true;
+            } else if (decision.equals("n")) {
+                return false;
+            } else {
+                System.out.println("Invalid Input");
+            }
+        }
+    }
+
+    private void removeCardFromDeck() {
+        boolean removeRunning = true;
+        while (removeRunning) {
+            System.out.println("\n Input name of card you want to remove");
+            String cardName = input.nextLine();
+            if (library.containsKey(cardName)) {
+                deck.removeCard(library.get(cardName));
+                System.out.println("Card(s) removed successfully");
+                removeRunning = askRemoveAnother();
+            } else {
+                System.out.println("Card not found in library, try again");
+                removeRunning = askRemoveAnother();
+            }
+        }
+    }
+
+    private Boolean askRemoveAnother() {
+        while (true) {
+            System.out.println("\nRemove another card? (Type y or n)");
+            String decision = input.nextLine().toLowerCase();
+            if (decision.equals("y")) {
+                return true;
+            } else if (decision.equals("n")) {
+                return false;
+            } else {
+                System.out.println("Invalid Input");
+            }
+        }
+    }
+
+    private void viewDeck() {
+        for (CardInDeck card : deck.retrieveCards()) {
+            System.out.println(card.getCard().getName() + " x " + card.getCopies());
+        }
     }
 
 

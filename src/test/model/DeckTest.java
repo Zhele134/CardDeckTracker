@@ -92,21 +92,21 @@ public class DeckTest {
 
     @Test
     void testAdd1CardType() {
-        deck.addCard(minion1, 2);
+        assertTrue(deck.addCard(minion1, 2));
         assertTrue(deck.isCardInDeck(minion1));
         assertEquals(80, deck.getDustCost());
     }
 
     @Test
     void testAddTooManyCards() {
-        deck.addCard(minion2, 3);
+        assertFalse(deck.addCard(minion2, 3));
         assertFalse(deck.isCardInDeck(minion2));
         assertEquals(0, deck.getDustCost());
     }
 
     @Test
     void testAddTooManyLegendaries() {
-        deck.addCard(hero, 2);
+        assertFalse(deck.addCard(hero, 2));
         assertFalse(deck.isCardInDeck(hero));
         assertEquals(0, deck.getDustCost());
     }
@@ -127,23 +127,23 @@ public class DeckTest {
 
     @Test
     void testSuccessfulAddDuplicates() {
-        deck.addCard(minion1, 1);
+        assertTrue(deck.addCard(minion1, 1));
         assertEquals(1, deck.countDeckSize());
-        deck.addCard(minion1, 1);
+        assertTrue(deck.addCard(minion1, 1));
         assertEquals(2, deck.countDeckSize());
         assertEquals(80, deck.getDustCost());
     }
 
     @Test
     void testNotSuccessfulDuplicateAddition() {
-        deck.addCard(minion1, 2);
+        assertTrue(deck.addCard(minion1, 2));
         assertTrue(deck.isCardInDeck(minion1));
-        deck.addCard(minion1, 1);
+        assertFalse(deck.addCard(minion1, 1));
         assertEquals(2, deck.countDeckSize());
 
-        deck.addCard(weapon1, 1);
+        assertTrue(deck.addCard(weapon1, 1));
         assertTrue(deck.isCardInDeck(weapon1));
-        deck.addCard(weapon1, 1);
+        assertFalse(deck.addCard(weapon1, 1));
         assertEquals(3, deck.countDeckSize());
     }
 
@@ -179,6 +179,15 @@ public class DeckTest {
         minion1.setRarity("Wowie Wow Wow");
         deck.addCard(minion1, 2);
         assertEquals(0, deck.getDustCost());
+    }
+
+    @Test
+    void testRetrieveCards() {
+        deck.addCard(minion2, 2);
+        deck.addCard(spell1, 2);
+        deck.addCard(weapon1, 1);
+        deck.addCard(minion1, 2);
+        assertEquals(4, deck.retrieveCards().size());
     }
 
 

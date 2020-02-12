@@ -23,7 +23,7 @@ public class Deck {
                limit, won't add card if it does.
                In all instances that the card is added, total dust value of deck is updated.
      */
-    public void addCard(Card card, int copies) {
+    public boolean addCard(Card card, int copies) {
         //Check if adding cards will exceed card limit
         //System.out.println("Before, there are " + countDeckSize() + " cards in this deck");
         if ((countDeckSize() + copies) <= deckLimit) {
@@ -37,11 +37,13 @@ public class Deck {
                     //Modifies number of copies of card within deck if true
                     deck.get(card.getName()).setCopies(returnTotalAddedCopies(deck.get(card.getName()), copies));
                     dustCost = dustCost + (dustForCard(card.getRarity()) * copies);
-                    System.out.println("Copies added successfully, now " + countDeckSize() + " cards in deck now");
+                    return true;
+                    //System.out.println("Copies added successfully, now " + countDeckSize() + " cards in deck now");
 
                 } else {
                     //can't add that many copies of the card to the deck
-                    System.out.println("Past duplicate limit");
+                    return false;
+                    //System.out.println("Past duplicate limit");
                 }
 
             } else {
@@ -54,17 +56,21 @@ public class Deck {
                     CardInDeck cardInDeck = new CardInDeck(card, copies);
                     deck.put(card.getName(), cardInDeck);
                     dustCost = dustCost + dustForCard(cardInDeck.getCard().getRarity()) * cardInDeck.getCopies();
-                    System.out.println("Cards added successfully, there are now " + countDeckSize() + " cards in deck");
+                    return true;
+                    //System.out.println("Cards added successfully, there are now " + countDeckSize() + "
+                    // cards in deck");
 
                 } else {
                     //Can't add that many of that card to deck
-                    System.out.println("Can't add that many copies");
+                    return false;
+                    //System.out.println("Can't add that many copies");
                 }
             }
 
         } else {
             //Too many cards will be added to deck
-            System.out.println("Too many cards in deck");
+            return true;
+            //System.out.println("Too many cards in deck");
         }
     }
 
@@ -75,7 +81,7 @@ public class Deck {
         deck.remove(card.getName());
         int dust = (dustForCard(card.getRarity()) * removedCopies);
         dustCost = dustCost - dust;
-        System.out.println("Cards removed, there are now " + countDeckSize() + " cards in deck");
+       // System.out.println("Cards removed, there are now " + countDeckSize() + " cards in deck");
     }
 
     //EFFECT: returns dust cost of deck
@@ -122,13 +128,13 @@ public class Deck {
     //EFFECT: return true if you can add copiesAdded copies of the card to your deck, return false it not
     private boolean checkAddCopiesToExistingCard(CardInDeck cid, int copiesAdded) {
         if (isLegendary(cid.getCard())) {
-            System.out.println("Can't add any more legendary cards");
+            //System.out.println("Can't add any more legendary cards");
             return false;
         } else {
             if ((cid.getCopies() + copiesAdded) <= DUPLICATE_LIMIT) {
                 return true;
             } else {
-                System.out.println("Already " + cid.getCopies() + " in deck, can't add past " + DUPLICATE_LIMIT);
+               // System.out.println("Already " + cid.getCopies() + " in deck, can't add past " + DUPLICATE_LIMIT);
                 return false;
             }
         }
@@ -146,6 +152,10 @@ public class Deck {
     //EFFECT: return total added copies of card within deck
     private int returnTotalAddedCopies(CardInDeck cid, int copiesAdded) {
         return (cid.getCopies() + copiesAdded);
+    }
+
+    public Collection<CardInDeck> retrieveCards() {
+        return deck.values();
     }
 
 
