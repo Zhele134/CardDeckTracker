@@ -25,7 +25,7 @@ public class Deck {
      */
     public void addCard(Card card, int copies) {
         //Check if adding cards will exceed card limit
-        System.out.println("Before, there are " + countDeckSize() + " cards in this deck");
+        //System.out.println("Before, there are " + countDeckSize() + " cards in this deck");
         if ((countDeckSize() + copies) <= deckLimit) {
 
             //Check if card is already within deck
