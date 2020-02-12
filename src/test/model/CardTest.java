@@ -13,7 +13,6 @@ class CardTest {
 
     @BeforeEach
     void runBefore() {
-
         minion = new Minion();
         spell = new Spell();
         weapon = new Weapon();
@@ -32,6 +31,9 @@ class CardTest {
         minion.setRarity("Common");
         minion.setTribe("Beast");
 
+        minion.setRewardDesc("Bad");
+        minion.setRewardCost(2);
+
         assertEquals("Minion", minion.getType());
         assertEquals("Rogue", minion.getGameClass());
         assertEquals(3, minion.getAttack() );
@@ -42,6 +44,9 @@ class CardTest {
                 minion.getDesc());
         assertEquals("Common",minion.getRarity() );
         assertEquals("Beast", minion.getTribe());
+
+        assertEquals(null, minion.getRewardDesc());
+        assertEquals(null, minion.getRewardCost());
     }
 
     @Test
@@ -53,6 +58,13 @@ class CardTest {
         spell.setRarity("Epic");
         spell.setDesc("Cast 10 random spells (targets chosen randomly)");
 
+        spell.setRewardCost(2);
+        spell.setRewardDesc("Bad");
+        spell.setTribe("Spell");
+        spell.setAttack(2);
+        spell.setHealth(2);
+
+
         assertEquals("Spell", spell.getType());
         assertEquals("Mage", spell.getGameClass());
         assertEquals(10 , spell.getCost() );
@@ -60,6 +72,12 @@ class CardTest {
         assertEquals("Cast 10 random spells (targets chosen randomly)",
                 spell.getDesc());
         assertEquals("Epic",spell.getRarity() );
+
+        assertEquals(null, spell.getRewardCost());
+        assertEquals(null, spell.getRewardDesc());
+        assertEquals(null, spell.getTribe());
+        assertEquals(null, spell.getAttack());
+        assertEquals(null, spell.getHealth());
     }
 
     @Test
@@ -73,6 +91,10 @@ class CardTest {
         weapon.setRarity("Legendary");
         weapon.setDesc("After your hero attacks, draw a Pirate from your deck");
 
+        weapon.setRewardDesc("Weapon");
+        weapon.setRewardCost(2);
+        weapon.setTribe("Also Weapon");
+
         assertEquals("Weapon", weapon.getType());
         assertEquals("Warrior", weapon.getGameClass());
         assertEquals(3 , weapon.getCost() );
@@ -81,6 +103,10 @@ class CardTest {
         assertEquals(2, weapon.getHealth());
         assertEquals("After your hero attacks, draw a Pirate from your deck", weapon.getDesc());
         assertEquals("Legendary",weapon.getRarity() );
+
+        assertEquals(null, weapon.getRewardDesc());
+        assertEquals(null, weapon.getRewardCost());
+        assertEquals(null, weapon.getTribe());
     }
 
     @Test
@@ -95,6 +121,9 @@ class CardTest {
         hero.setRewardCost(2);
         hero.setRewardDesc("Deal 2 damage to any enemy");
 
+        hero.setAttack(1);
+        hero.setTribe("I need a hero");
+
         assertEquals("HeroCard", hero.getType());
         assertEquals("Hunter", hero.getGameClass());
         assertEquals(10 , hero.getCost() );
@@ -105,6 +134,9 @@ class CardTest {
         assertEquals("Legendary",hero.getRarity() );
         assertEquals(2, hero.getRewardCost());
         assertEquals("Deal 2 damage to any enemy", hero.getRewardDesc());
+
+        assertEquals(null, hero.getAttack());
+        assertEquals(null, hero.getTribe());
     }
 
 

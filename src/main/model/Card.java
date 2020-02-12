@@ -12,6 +12,7 @@ public abstract class Card {
     protected int health;
     protected String rewardDesc;
     protected String rewardCost;
+    protected int copies;
 
     //MODIFIES: THIS
     //EFFECTS: Sets cost of Card
@@ -83,6 +84,10 @@ public abstract class Card {
     public String getRarity() {
         return rarity;
     }
+
+
+
+    //========================================================================================================
 
     //MODIFIES: THIS
     //EFFECTS: sets attack to inputted value

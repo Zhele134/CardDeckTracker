@@ -52,17 +52,17 @@ public class HeroCard extends Card {
 
     @Override
     public void setAttack(int attack) {
-
+        System.out.println("Can't set this");
     }
 
     @Override
     public Integer getAttack() {
-        return 0;
+        return null;
     }
 
     @Override
     public void setTribe(String tribe) {
-
+        System.out.println("Can't set this");
     }
 
     @Override

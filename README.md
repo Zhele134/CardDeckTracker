@@ -20,8 +20,7 @@ can make it easier to draft up concepts of these cards, allowing me to contribut
 
 #User Stories
 
-- As a user, I want to be able to select the type of card I'm making before adding its stats, as well as the class the
-card belongs to
+- As a user, I want to be able to select the type of card I'm making before adding its stats
 - As a user, I want to be able to add stats to my cards (attack, health, rarity, tribe, cost, etc.)
 - As a user, I want to be able to edit these stats to my cards if I want to make changes
 - As a user, I want to be able to make decks by adding or removing cards to them

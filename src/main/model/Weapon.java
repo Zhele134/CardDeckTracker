@@ -37,7 +37,7 @@ public class Weapon extends Card {
      */
     @Override
     public void setTribe(String tribe) {
-
+        System.out.println("Can't set this");
     }
 
     @Override
@@ -47,17 +47,17 @@ public class Weapon extends Card {
 
     @Override
     public void setRewardCost(int rewardCost) {
-
+        System.out.println("Can't set this");
     }
 
     @Override
     public Integer getRewardCost() {
-        return 0;
+        return null;
     }
 
     @Override
     public void setRewardDesc(String rewardDesc) {
-
+        System.out.println("Can't set this");
     }
 
     @Override

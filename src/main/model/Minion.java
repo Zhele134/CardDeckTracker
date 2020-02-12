@@ -49,7 +49,7 @@ public class Minion extends Card {
      */
     @Override
     public void setRewardCost(int rewardCost) {
-
+        System.out.println("Can't set this");
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Minion extends Card {
 
     @Override
     public void setRewardDesc(String rewardDesc) {
-
+        System.out.println("Can't set this");
     }
 
     @Override
