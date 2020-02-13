@@ -7,7 +7,6 @@ public class Deck {
     public static final int DUPLICATE_LIMIT = 2;
     public static final int LEGENDARY_LIMIT = 1;
     private int dustCost;
-    private int deckSize;
     private HashMap<String, CardInDeck> deck;
 
     public Deck() {
@@ -154,6 +153,7 @@ public class Deck {
         return (cid.getCopies() + copiesAdded);
     }
 
+    //EFFECT: return all CardInDeck values within map
     public Collection<CardInDeck> retrieveCards() {
         return deck.values();
     }

@@ -16,6 +16,7 @@ public class ConsoleApp {
     }
 
     //Inspired from the method RunTeller in the TellerApp class in CPSC210 Example
+    //EFFECTS: starts app, displays and reads choices for start menu
     private void startApp() {
         input = new Scanner(System.in);
         String command = null;
@@ -45,6 +46,7 @@ public class ConsoleApp {
     }
 
 
+    //EFFECTS: display start menu
     private void displayStartMenu() {
         System.out.println("\nWelcome to the app, please select your choice:");
         System.out.println("\tc -> Make a card");
@@ -53,6 +55,7 @@ public class ConsoleApp {
         System.out.println("\nq -> Quit");
     }
 
+    //EFFECTS: runs process to make card
     private void makeCard() {
         boolean runningCard = true;
         Card card;
@@ -79,6 +82,7 @@ public class ConsoleApp {
         }
     }
 
+    //EFFECTS: display card type menu
     private void displayCardTypes() {
         System.out.println("\nWhat type of card are you making?");
         System.out.println("\tm -> Minion");
@@ -88,6 +92,8 @@ public class ConsoleApp {
         System.out.println("\tb -> Go Back To Previous Menu");
     }
 
+    //instanceof Method retrieved from https://stackoverflow.com/questions/541749/how-to-determine-an-objects-class
+    //EFFECTS: instantiates different types of card based on user input, then lets user choose stats for card
     private void chooseStats(Card card) {
         System.out.println("Input class");
         String gameClass = input.nextLine().toLowerCase();
@@ -109,6 +115,7 @@ public class ConsoleApp {
         library.put(card.getName(), card);
     }
 
+    //EFFECTS: Lets user input minion stats
     private void inputMinionStats(Card card) {
         System.out.println("Input Cost");
         int cost = input.nextInt();
@@ -134,6 +141,7 @@ public class ConsoleApp {
         card.setTribe(tribe);
     }
 
+    //EFFECTS: lets user input spell stats
     private void inputSpellStats(Card card) {
         System.out.println("Input Cost");
         int cost = input.nextInt();
@@ -150,6 +158,7 @@ public class ConsoleApp {
         card.setRarity(rarity);
     }
 
+    //EFFECT: lets user input weapon stats
     private void inputWeaponStats(Card card) {
         System.out.println("Input Cost");
         int cost = input.nextInt();
@@ -172,6 +181,7 @@ public class ConsoleApp {
         card.setRarity(rarity);
     }
 
+    //EFFECT: lets user input hero card stats
     private void inputHeroStats(Card card) {
         System.out.println("Input Cost");
         int cost = input.nextInt();
@@ -198,6 +208,7 @@ public class ConsoleApp {
         card.setRarity(rarity);
     }
 
+    //EFFECT: prints stats of card based on type of card
     private void printStats(Card card) {
         if (card instanceof Minion) {
             printMinionStats(card);
@@ -210,6 +221,7 @@ public class ConsoleApp {
         }
     }
 
+    //EFFECT: prints minion stats
     private void printMinionStats(Card card) {
         System.out.println("Type: " + card.getType());
         System.out.println("Class: " + card.getGameClass());
@@ -222,6 +234,7 @@ public class ConsoleApp {
         System.out.println("Rarity: " + card.getRarity());
     }
 
+    //EFFECT: prints spell stats
     private void printSpellStats(Card card) {
         System.out.println("Type: " + card.getType());
         System.out.println("Class: " + card.getGameClass());
@@ -231,6 +244,7 @@ public class ConsoleApp {
         System.out.println("Rarity: " + card.getRarity());
     }
 
+    //EFFECT: prints weapon stats
     private void printWeaponStats(Card card) {
         System.out.println("Type: " + card.getType());
         System.out.println("Class: " + card.getGameClass());
@@ -242,6 +256,7 @@ public class ConsoleApp {
         System.out.println("Rarity: " + card.getRarity());
     }
 
+    //EFFECT: prints hero card stats
     private void printHeroStats(Card card) {
         System.out.println("Type: " + card.getType());
         System.out.println("Class: " + card.getGameClass());
@@ -254,12 +269,14 @@ public class ConsoleApp {
         System.out.println("Rarity: " + card.getRarity());
     }
 
+    //EFFECT: lets user view names of all cards within card library
     private void viewCardLibrary() {
         for (String name : library.keySet()) {
             System.out.println(name);
         }
     }
 
+    //EFFECT: runs menu for deck-making process, and processes choices for them
     private void makeDeck() {
         boolean deckRunning = true;
         while (deckRunning) {
@@ -283,6 +300,7 @@ public class ConsoleApp {
 
     }
 
+    //EFFECT: displays starter deck menu
     private void displayDeckMenu() {
         System.out.println("\nChoose what to do with the deck");
         System.out.println("\ta -> Add Card");
@@ -292,6 +310,7 @@ public class ConsoleApp {
         System.out.println("\tb -> Go Back");
     }
 
+    //EFFECT: runs process to add card to deck
     private void addCardToDeck() {
         boolean addRunning = true;
         while (addRunning) {
@@ -315,6 +334,7 @@ public class ConsoleApp {
         }
     }
 
+    //EFFECT: lets user choose if they want to add another card or not
     private boolean askAddAnother() {
         while (true) {
             System.out.println("\nAdd another card? (Type y or n)");
@@ -329,6 +349,7 @@ public class ConsoleApp {
         }
     }
 
+    //EFFECT: runs process to remove card from deck
     private void removeCardFromDeck() {
         boolean removeRunning = true;
         while (removeRunning) {
@@ -345,6 +366,7 @@ public class ConsoleApp {
         }
     }
 
+    //EFFECT: asks user if they want to remove another card from deck or not
     private Boolean askRemoveAnother() {
         while (true) {
             System.out.println("\nRemove another card? (Type y or n)");
@@ -359,12 +381,14 @@ public class ConsoleApp {
         }
     }
 
+    //EFFECT: Lets user view all cards currently within the deck
     private void viewDeck() {
         for (CardInDeck card : deck.retrieveCards()) {
             System.out.println(card.getCard().getName() + " x " + card.getCopies());
         }
     }
 
+    //EFFECT: lets user view dust cost of deck
     private void viewDustCost() {
         System.out.println("This deck currently costs " + deck.getDustCost() + " dust to create.");
     }
