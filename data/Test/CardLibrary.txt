@@ -1,0 +1,25 @@
+{
+  "Blink Fox": {
+    "type": "Minion",
+    "name": "Blink Fox",
+    "cost": 3,
+    "description": "Battlecry: Add a random card to your hand (from your opponent\u0027s class)",
+    "gameClass": "Rogue",
+    "rarity": "Common",
+    "tribe": "Beast",
+    "attack": 3,
+    "health": 3,
+    "rewardCost": 0
+  },
+  "Puzzle Box of Yogg-Saron": {
+    "type": "Spell",
+    "name": "Puzzle Box of Yogg-Saron",
+    "cost": 10,
+    "description": "Cast 10 random spells (targets chosen randomly)",
+    "gameClass": "Mage",
+    "rarity": "Epic",
+    "attack": 0,
+    "health": 0,
+    "rewardCost": 0
+  }
+}
