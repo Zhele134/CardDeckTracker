@@ -1,9 +1,6 @@
 package model;
 
 public class Weapon extends Card {
-    Card weapon;
-    private int weaponAttack;
-    private int durability;
 
     public Weapon() {
         this.type = "Weapon";
@@ -12,24 +9,23 @@ public class Weapon extends Card {
     //MODIFIES: THIS
     //EFFECTS: sets attack to inputted value
     public void setAttack(int attack) {
-        weaponAttack = attack;
+        this.attack = attack;
     }
 
     //EFFECTS: returns value of attack
     public Integer getAttack() {
-        return weaponAttack;
+        return attack;
     }
 
     //MODIFIES: THIS
     //EFFECTS: sets durability to inputted value
     public void setHealth(int health) {
-        durability = health;
-
+        this.health = health;
     }
 
     //EFFECTS: returns value of durability
     public Integer getHealth() {
-        return durability;
+        return health;
     }
 
     /*

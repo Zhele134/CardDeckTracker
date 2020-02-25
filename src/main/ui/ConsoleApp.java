@@ -1,15 +1,26 @@
 package ui;
 
 
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import model.*;
+import persistence.CardReaderWriter;
 
 
+import java.io.*;
+
+import java.lang.reflect.Type;
 import java.util.*;
 
 public class ConsoleApp {
     private Scanner input;
-    private HashMap<String, Card> library;
+    private HashMap<String, Card> library = new HashMap<>();
     private Deck deck;
+    private CardReaderWriter cardReaderWriter;
+    private static final String TEST_FILE = "./data/Test/TestFile1.txt";
+    private static final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
+    private Gson libraryReader = new GsonBuilder().setPrettyPrinting().create();
+
 
     public ConsoleApp() {
         startApp();
@@ -18,17 +29,14 @@ public class ConsoleApp {
     //Inspired from the method RunTeller in the TellerApp class in CPSC210 Example
     //EFFECTS: starts app, displays and reads choices for start menu
     private void startApp() {
-        input = new Scanner(System.in);
+        instantiateFields();
         String command = null;
         boolean stillRunning = true;
-        deck = new Deck();
-        library = new HashMap<String, Card>();
 
         while (stillRunning) {
             displayStartMenu();
             command = input.nextLine();
             command = command.toLowerCase();
-
             if (command.equals("q")) {
                 stillRunning = false;
             } else if (command.equals("c")) {
@@ -37,13 +45,29 @@ public class ConsoleApp {
                 makeDeck();
             } else if (command.equals("v")) {
                 viewCardLibrary();
+            } else if (command.equals("s")) {
+                saveCardLibrary();
             } else {
                 System.out.println("Invalid selection, try again");
             }
         }
-
         System.out.println("\nThank you for using the application.");
     }
+
+    //EFFECTS: advances program based on user input
+    private void instantiateFields() {
+        input = new Scanner(System.in);
+        deck = new Deck();
+        cardReaderWriter = new CardReaderWriter();
+        try {
+            Type type = new TypeToken<HashMap<String, Card>>() {}.getType();
+            FileReader readingLibrary = new FileReader(HS_CARD_LIBRARY);
+            library = libraryReader.fromJson(readingLibrary, type);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     //EFFECTS: display start menu
@@ -52,6 +76,7 @@ public class ConsoleApp {
         System.out.println("\tc -> Make a card");
         System.out.println("\td -> Make a deck");
         System.out.println("\tv -> View card library");
+        System.out.println("\ts -> Save card library");
         System.out.println("\nq -> Quit");
     }
 
@@ -61,7 +86,7 @@ public class ConsoleApp {
         Card card;
         while (runningCard) {
             displayCardTypes();
-            String type = input.nextLine().toLowerCase();
+            String type = input.nextLine();
             switch (type) {
                 case "m": card = new Minion();
                     chooseStats(card);
@@ -274,6 +299,12 @@ public class ConsoleApp {
         for (String name : library.keySet()) {
             System.out.println(name);
         }
+    }
+
+    //EFFECT: save card library to file
+    private void saveCardLibrary() {
+        cardReaderWriter.saveLibrary(library, HS_CARD_LIBRARY);
+        System.out.println("File saved successfully to: " + HS_CARD_LIBRARY);
     }
 
     //EFFECT: runs menu for deck-making process, and processes choices for them

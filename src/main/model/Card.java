@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Card {
+public class Card {
     protected String type;
     protected String name;
     protected int cost;
@@ -11,8 +11,8 @@ public abstract class Card {
     protected int attack;
     protected int health;
     protected String rewardDesc;
-    protected String rewardCost;
-    protected int copies;
+    protected int rewardCost;
+
 
     //MODIFIES: THIS
     //EFFECTS: Sets cost of Card
@@ -91,36 +91,56 @@ public abstract class Card {
 
     //MODIFIES: THIS
     //EFFECTS: sets attack to inputted value
-    public abstract void setAttack(int attack);
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
 
     //EFFECTS: returns value of attack
-    public abstract Integer getAttack();
+    public Integer getAttack() {
+        return attack;
+    }
 
     //MODIFIES: THIS
     //EFFECTS: sets health to inputted value
-    public abstract void setHealth(int health);
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     //EFFECTS: returns value of health
-    public abstract Integer getHealth();
+    public Integer getHealth() {
+        return health;
+    }
 
     //MODIFIES: THIS
     //EFFECTS: sets tribe to inputted value
-    public abstract void setTribe(String tribe);
+    public void setTribe(String tribe) {
+        this.tribe = tribe;
+    }
 
     //EFFECTS: returns value of tribe
-    public abstract String getTribe();
+    public String getTribe() {
+        return tribe;
+    }
 
     //MODIFIES: THIS
     //EFFECTS: sets reward cost to inputted value
-    public abstract void setRewardCost(int rewardCost);
+    public void setRewardCost(int rewardCost) {
+        this.rewardCost = rewardCost;
+    }
 
     //EFFECTS: returns value of reward cost
-    public abstract Integer getRewardCost();
+    public Integer getRewardCost() {
+        return rewardCost;
+    }
 
     //MODIFIES: THIS
     //EFFECTS: sets reward description to inputted value
-    public abstract void setRewardDesc(String rewardDesc);
+    public void setRewardDesc(String rewardDesc) {
+        this.rewardDesc = rewardDesc;
+    }
 
     //EFFECTS: returns value of reward description
-    public abstract String getRewardDesc();
+    public String getRewardDesc() {
+        return rewardDesc;
+    }
 }

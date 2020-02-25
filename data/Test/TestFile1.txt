@@ -1,0 +1,26 @@
+{
+  "Ancharrr": {
+  
+    "type": "Weapon",
+    "name": "Ancharrr",
+    "cost": 3,
+    "description": "After your hero attacks, draw a Pirate from your deck",
+    "gameClass": "warrior",
+    "rarity": "Legendary",
+    "attack": 2,
+    "health": 2,
+    "rewardCost": 0
+  },
+  "Zul\u0027jin": {
+    "type": "HeroCard",
+    "name": "Zul\u0027jin",
+    "cost": 10,
+    "description": "Battlecry: Cast all spells you\u0027ve played this game (targets chosen randomly)",
+    "gameClass": "hunter",
+    "rarity": "Legendary",
+    "attack": 0,
+    "health": 5,
+    "rewardDesc": "Deal 2 damage to any enemy",
+    "rewardCost": 2
+  }
+}

@@ -2,9 +2,6 @@ package model;
 
 public class HeroCard extends Card {
     Card hero;
-    private int armor;
-    private String rewardDesc;
-    private int rewardCost;
 
     public HeroCard() {
         this.type = "HeroCard";
@@ -15,12 +12,12 @@ public class HeroCard extends Card {
     //MODIFIES: THIS
     //EFFECTS: sets ArmorGain to inputted value
     public void setHealth(int health) {
-        armor = health;
+        this.health = health;
     }
 
     //EFFECTS: returns value of ArmorGain
     public Integer getHealth() {
-        return armor;
+        return health;
     }
 
     //MODIFIES: THIS
