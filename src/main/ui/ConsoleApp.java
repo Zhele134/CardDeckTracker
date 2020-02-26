@@ -5,8 +5,12 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.*;
 import persistence.CardReaderWriter;
+import persistence.DeckReaderWriter;
+import javax.swing.JFileChooser;
+import javax.swing.JDialog;
 
 
+import java.awt.*;
 import java.io.*;
 
 import java.lang.reflect.Type;
@@ -17,8 +21,10 @@ public class ConsoleApp {
     private HashMap<String, Card> library = new HashMap<>();
     private Deck deck;
     private CardReaderWriter cardReaderWriter;
+    private DeckReaderWriter deckReaderWriter;
     private static final String TEST_FILE = "./data/Test/TestFile1.txt";
     private static final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
+    private static final String DECK_1 = "./data/Cards/Deck_1";
    // private Gson libraryReader = new GsonBuilder().setPrettyPrinting().create();
 
 
@@ -59,6 +65,7 @@ public class ConsoleApp {
         input = new Scanner(System.in);
         deck = new Deck();
         cardReaderWriter = new CardReaderWriter();
+        deckReaderWriter = new DeckReaderWriter();
 
         //https://howtodoinjava.com/gson/gson-serialize-deserialize-hashmap/
         Type type = new TypeToken<HashMap<String, Card>>() {}.getType();
@@ -325,24 +332,21 @@ public class ConsoleApp {
     //EFFECTS: processes deck menu choice based on user input
     private boolean processDeckMenuChoice(String choice) {
         switch (choice) {
-            case "a":
-                addCardToDeck();
+            case "a": addCardToDeck();
                 break;
-            case "r":
-                removeCardFromDeck();
+            case "r": removeCardFromDeck();
                 break;
-            case "v":
-                viewDeck();
+            case "v":  viewDeck();
                 break;
-            case "d":
-                viewDustCost();
+            case "d":  viewDustCost();
                 break;
-            case "b":
-                return false;
-            default:
-                System.out.println("Invalid output, try again");
-        }
-        return true;
+            case "s": saveDeck();
+                break;
+            case "l": loadDeck();
+                break;
+            case "b": return false;
+            default: System.out.println("Invalid output, try again");
+        }  return true;
     }
 
     //EFFECT: displays starter deck menu
@@ -352,6 +356,8 @@ public class ConsoleApp {
         System.out.println("\tr -> Remove Card");
         System.out.println("\tv -> View Deck");
         System.out.println("\td -> View Dust Cost of Deck");
+        System.out.println("\ts -> Save deck");
+        System.out.println("\tl -> Load deck");
         System.out.println("\tb -> Go Back");
     }
 
@@ -438,5 +444,37 @@ public class ConsoleApp {
         System.out.println("This deck currently costs " + deck.getDustCost() + " dust to create.");
     }
 
+    private void saveDeck() {
+        String saveDummy = "./data/Decks/";
+        input = new Scanner(System.in);
+        System.out.println("Insert name of deck:");
+        //https://stackoverflow.com/questions/15633228/how-to-remove-all-white-spaces-in-java/15633284
+        String name = input.nextLine().replaceAll(" ", "_");
+        saveDummy = saveDummy + name + ".txt";
 
+        deckReaderWriter.saveDeck(deck, saveDummy);
+        System.out.println("Deck successfully saved to " + saveDummy);
+    }
+
+    private void loadDeck() {
+        Type type = new TypeToken<Deck>() {}.getType();
+        File startingPath = new File("C:\\Users\\roxas\\CPSC210\\PROJECT\\TermProject_h0w2b\\data\\Decks");
+
+        JFileChooser deckChoice = new JFileChooser();
+        deckChoice.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        //https://stackoverflow.com/questions/17438630/how-to-generate-a-stand-alone-jfilechooser-dialog-
+        // box-on-top-of-other-windows
+        JDialog window = new JDialog((Window)null);
+        window.setVisible(true);
+
+        //https://docs.oracle.com/javase/7/docs/api/javax/swing/JFileChooser.html#setCurrentDirectory(java.io.File)
+        deckChoice.setCurrentDirectory(startingPath);
+        deckChoice.showOpenDialog(window);
+        String name = deckChoice.getSelectedFile().getName();
+
+        String deckName = "./data/Decks/" + name;
+        deck = deckReaderWriter.readDeck(deckName, type);
+        System.out.println("Deck " + name + " retrieved successfully");
+    }
 }

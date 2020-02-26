@@ -25,3 +25,5 @@ can make it easier to draft up concepts of these cards, allowing me to contribut
 - As a user, I want to be able to edit these stats to my cards if I want to make changes
 - As a user, I want to be able to make decks by adding or removing cards to them
 - As a user, I want to see how much these decks will cost to craft (dust value)
+- As a user, I want to be able to save my cards, and load them to use again later.
+- As a user, I want to be able to save my decks, and load them to edit later. 
