@@ -24,7 +24,7 @@ public class CardReaderWriterTest {
     final String TEST_FILE = "./data/Test/CardLibrary.txt";
     final String TEST_FILE_1 = "./data/Test/TestFile1.txt";
 
-    final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
+    //final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
 
     @BeforeEach
     void runBefore() {

@@ -1,37 +1,72 @@
 {
-  "Ancharrr": {
-    "type": "Weapon",
-    "name": "Ancharrr",
+  "Wardruid Loti": {
+    "type": "Minion",
+    "name": "Wardruid Loti",
     "cost": 3,
-    "description": "After your hero attacks, draw a Pirate from your deck",
-    "gameClass": "warrior",
+    "description": "Choose One - Transform into one of Loti\u0027s four dinosaur forms",
+    "gameClass": "druid",
     "rarity": "Legendary",
-    "attack": 0,
-    "health": 0,
+    "tribe": "",
+    "attack": 1,
+    "health": 2,
     "rewardCost": 0
-  },
-  "Zul\u0027jin": {
-    "type": "HeroCard",
-    "name": "Zul\u0027jin",
-    "cost": 10,
-    "description": "Battlecry: Cast all spells you\u0027ve played this game (targets chosen randomly)",
-    "gameClass": "hunter",
-    "rarity": "Legendary",
-    "attack": 0,
-    "health": 0,
-    "rewardDesc": "Deal 2 damage to any enemy",
-    "rewardCost": 2
   },
   "Oasis Surger": {
     "type": "Minion",
     "name": "Oasis Surger",
     "cost": 5,
-    "description": "Rush, Choose One - Gain +2/+2; or Summon a copy of this minion.",
+    "description": "Rush, Choose One - Gain +2/+2 or Summon a copy of this minion.",
     "gameClass": "druid",
     "rarity": "Common",
     "tribe": "Elemental",
     "attack": 3,
     "health": 3,
+    "rewardCost": 0
+  },
+  "Innervate": {
+    "type": "Spell",
+    "name": "Innervate",
+    "cost": 0,
+    "description": "Gain 1 mana crystal this turn only.",
+    "gameClass": "druid",
+    "rarity": "Common",
+    "attack": 0,
+    "health": 0,
+    "rewardCost": 0
+  },
+  "Rising Winds": {
+    "type": "Spell",
+    "name": "Rising Winds",
+    "cost": 2,
+    "description": "Twinspell Choose One - Draw a card; or Summon a 3/2 Eagle.",
+    "gameClass": "druid",
+    "rarity": "Common",
+    "attack": 0,
+    "health": 0,
+    "rewardCost": 0
+  },
+  "Crystal Merchant": {
+    "type": "Minion",
+    "name": "Crystal Merchant",
+    "cost": 2,
+    "description": "If you have any unspent mana at the end of your turn, draw a card.",
+    "gameClass": "druid",
+    "rarity": "Epic",
+    "tribe": "",
+    "attack": 1,
+    "health": 4,
+    "rewardCost": 0
+  },
+  "Anubisath Defender": {
+    "type": "Minion",
+    "name": "Anubisath Defender",
+    "cost": 5,
+    "description": "Taunt. Costs (0) if you\u0027ve cast a spell that costs (5) or more this turn.",
+    "gameClass": "druid",
+    "rarity": "Epic",
+    "tribe": "",
+    "attack": 3,
+    "health": 5,
     "rewardCost": 0
   }
 }

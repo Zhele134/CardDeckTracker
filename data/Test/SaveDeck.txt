@@ -1,0 +1,35 @@
+{
+  "deckLimit": 30,
+  "dustCost": 120,
+  "deck": {
+    "Corrosive Breath": {
+      "theCard": {
+        "type": "Spell",
+        "name": "Corrosive Breath",
+        "cost": 2,
+        "description": "Deal 3 damage to a minion. If you\u0027re holding a dragon, it also hits the enemy hero",
+        "gameClass": "Hunter",
+        "rarity": "Common",
+        "attack": 0,
+        "health": 0,
+        "rewardCost": 0
+      },
+      "copies": 1
+    },
+    "Big Ol\u0027 Whelp": {
+      "theCard": {
+        "type": "Minion",
+        "name": "Big Ol\u0027 Whelp",
+        "cost": 5,
+        "description": "Battlecry: Draw a card.",
+        "gameClass": "Neutral",
+        "rarity": "Common",
+        "tribe": "Dragon",
+        "attack": 5,
+        "health": 5,
+        "rewardCost": 0
+      },
+      "copies": 2
+    }
+  }
+}

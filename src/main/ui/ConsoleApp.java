@@ -19,7 +19,7 @@ public class ConsoleApp {
     private CardReaderWriter cardReaderWriter;
     private static final String TEST_FILE = "./data/Test/TestFile1.txt";
     private static final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
-    private Gson libraryReader = new GsonBuilder().setPrettyPrinting().create();
+   // private Gson libraryReader = new GsonBuilder().setPrettyPrinting().create();
 
 
     public ConsoleApp() {
@@ -59,15 +59,15 @@ public class ConsoleApp {
         input = new Scanner(System.in);
         deck = new Deck();
         cardReaderWriter = new CardReaderWriter();
-        try {
-            Type type = new TypeToken<HashMap<String, Card>>() {}.getType();
-            FileReader readingLibrary = new FileReader(HS_CARD_LIBRARY);
-            library = libraryReader.fromJson(readingLibrary, type);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
+        //https://howtodoinjava.com/gson/gson-serialize-deserialize-hashmap/
+        Type type = new TypeToken<HashMap<String, Card>>() {}.getType();
+        library = cardReaderWriter.readLibrary(HS_CARD_LIBRARY, type);
+//       FileReader readingLibrary = new FileReader(HS_CARD_LIBRARY);
+//       library = libraryReader.fromJson(readingLibrary, type);
+
+
+    }
 
 
     //EFFECTS: display start menu
@@ -83,28 +83,33 @@ public class ConsoleApp {
     //EFFECTS: runs process to make card
     private void makeCard() {
         boolean runningCard = true;
-        Card card;
         while (runningCard) {
             displayCardTypes();
             String type = input.nextLine();
-            switch (type) {
-                case "m": card = new Minion();
-                    chooseStats(card);
-                    break;
-                case "s": card = new Spell();
-                    chooseStats(card);
-                    break;
-                case "w": card = new Weapon();
-                    chooseStats(card);
-                    break;
-                case "h": card = new HeroCard();
-                    chooseStats(card);
-                    break;
-                case "b": runningCard = false;
-                          break;
-                default: System.out.println("Invalid input, try again");
-            }
+            runningCard = processMakeCard(type);
         }
+    }
+
+    //EFFECTS: process makeCard choices based on user input
+    private boolean processMakeCard(String type) {
+        Card card;
+        switch (type) {
+            case "m": card = new Minion();
+                chooseStats(card);
+                break;
+            case "s": card = new Spell();
+                chooseStats(card);
+                break;
+            case "w": card = new Weapon();
+                chooseStats(card);
+                break;
+            case "h":  card = new HeroCard();
+                chooseStats(card);
+                break;
+            case "b": return false;
+            default: System.out.println("Invalid input, try again");
+        }
+        return true;
     }
 
     //EFFECTS: display card type menu
@@ -313,22 +318,31 @@ public class ConsoleApp {
         while (deckRunning) {
             displayDeckMenu();
             String choice = input.nextLine().toLowerCase();
-            switch (choice) {
-                case "a": addCardToDeck();
-                break;
-                case "r": removeCardFromDeck();
-                break;
-                case "v": viewDeck();
-                break;
-                case "d": viewDustCost();
-                break;
-                case "b": deckRunning = false;
-                break;
-                default: System.out.println("Invalid output, try again");
-            }
-
+            deckRunning = processDeckMenuChoice(choice);
         }
+    }
 
+    //EFFECTS: processes deck menu choice based on user input
+    private boolean processDeckMenuChoice(String choice) {
+        switch (choice) {
+            case "a":
+                addCardToDeck();
+                break;
+            case "r":
+                removeCardFromDeck();
+                break;
+            case "v":
+                viewDeck();
+                break;
+            case "d":
+                viewDustCost();
+                break;
+            case "b":
+                return false;
+            default:
+                System.out.println("Invalid output, try again");
+        }
+        return true;
     }
 
     //EFFECT: displays starter deck menu
@@ -423,8 +437,6 @@ public class ConsoleApp {
     private void viewDustCost() {
         System.out.println("This deck currently costs " + deck.getDustCost() + " dust to create.");
     }
-
-
 
 
 }

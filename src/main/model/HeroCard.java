@@ -20,29 +20,29 @@ public class HeroCard extends Card {
         return health;
     }
 
-    //MODIFIES: THIS
-    //EFFECTS: sets reward description to inputted value
-    public void setRewardDesc(String rewardDesc) {
-        this.rewardDesc = rewardDesc;
-
-    }
-
-    //EFFECTS: returns value of reward description
-    public String getRewardDesc() {
-        return rewardDesc;
-    }
-
-    //MODIFIES: THIS
-    //EFFECTS: sets reward cost to inputted value
-    public void setRewardCost(int rewardCost) {
-        this.rewardCost = rewardCost;
-
-    }
-
-    //EFFECTS: returns value of reward cost
-    public Integer getRewardCost() {
-        return rewardCost;
-    }
+//    //MODIFIES: THIS
+//    //EFFECTS: sets reward description to inputted value
+//    public void setRewardDesc(String rewardDesc) {
+//        this.rewardDesc = rewardDesc;
+//
+//    }
+//
+//    //EFFECTS: returns value of reward description
+//    public String getRewardDesc() {
+//        return rewardDesc;
+//    }
+//
+//    //MODIFIES: THIS
+//    //EFFECTS: sets reward cost to inputted value
+//    public void setRewardCost(int rewardCost) {
+//        this.rewardCost = rewardCost;
+//
+//    }
+//
+//    //EFFECTS: returns value of reward cost
+//    public Integer getRewardCost() {
+//        return rewardCost;
+//    }
     /*
     -------------------------------------------------------------------------------------------------------------------
      */

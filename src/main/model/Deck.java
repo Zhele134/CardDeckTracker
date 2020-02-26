@@ -158,6 +158,10 @@ public class Deck {
         return deck.values();
     }
 
+    public CardInDeck getCard(String name) {
+        return deck.get(name);
+    }
+
 
 
 }

@@ -1,0 +1,34 @@
+{
+  "deckLimit": 30,
+  "dustCost": 1800,
+  "deck": {
+    "The Amazing Reno": {
+      "theCard": {
+        "type": "HeroCard",
+        "name": "The Amazing Reno",
+        "cost": 10,
+        "description": "Battlecry: Make all minions disappear. *Poof!*",
+        "gameClass": "Mage",
+        "rarity": "Legendary",
+        "health": 5,
+        "rewardCost": -1,
+        "rewardDesc": "Passive Hero Power: At the start of your turn, cast a random spell."
+      },
+      "copies": 1
+    },
+    "Ritual Chopper": {
+      "theCard": {
+        "type": "Weapon",
+        "name": "Ritual Chopper",
+        "cost": 2,
+        "description": "Battlecry: Invoke Galakrond",
+        "gameClass": "Warrior",
+        "rarity": "Rare",
+        "attack": 1,
+        "health": 2,
+        "rewardCost": 0
+      },
+      "copies": 2
+    }
+  }
+}

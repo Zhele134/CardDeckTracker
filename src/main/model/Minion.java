@@ -7,40 +7,40 @@ public class Minion extends Card {
         this.type = "Minion";
     }
 
-    //MODIFIES: THIS
-    //EFFECTS: sets attack to inputted value
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    //EFFECTS: returns value of attack
-    public Integer getAttack() {
-        return attack;
-    }
-
-    //MODIFIES: THIS
-    //EFFECTS: sets health to inputted value
-    public void setHealth(int health) {
-        this.health = health;
-
-    }
-
-    //EFFECTS: returns value of health
-    public Integer getHealth() {
-        return health;
-    }
-
-    //MODIFIES: THIS
-    //EFFECTS: sets tribe to inputted value
-    public void setTribe(String tribe) {
-        this.tribe = tribe;
-
-    }
-
-    //EFFECTS: returns value of tribe
-    public String getTribe() {
-        return tribe;
-    }
+//    //MODIFIES: THIS
+//    //EFFECTS: sets attack to inputted value
+//    public void setAttack(int attack) {
+//        this.attack = attack;
+//    }
+//
+//    //EFFECTS: returns value of attack
+//    public Integer getAttack() {
+//        return attack;
+//    }
+//
+//    //MODIFIES: THIS
+//    //EFFECTS: sets health to inputted value
+//    public void setHealth(int health) {
+//        this.health = health;
+//
+//    }
+//
+//    //EFFECTS: returns value of health
+//    public Integer getHealth() {
+//        return health;
+//    }
+//
+//    //MODIFIES: THIS
+//    //EFFECTS: sets tribe to inputted value
+//    public void setTribe(String tribe) {
+//        this.tribe = tribe;
+//
+//    }
+//
+//    //EFFECTS: returns value of tribe
+//    public String getTribe() {
+//        return tribe;
+//    }
 
     /*
     *

@@ -15,11 +15,10 @@ public class CardReaderWriter {
     private static final String TEST_FILE = "./data/Test/CardLibrary.txt";
     private static final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
     Gson libraryWriter;
-    Gson cardWriter;
+
 
     public CardReaderWriter() {
         //https://mkyong.com/java/how-to-parse-json-with-gson/
-        cardWriter = new GsonBuilder().setPrettyPrinting().create();
         libraryWriter = new GsonBuilder().setPrettyPrinting().create();
 
     }
@@ -33,8 +32,8 @@ public class CardReaderWriter {
             file.flush();
             file.close();
 
-            String testLibrary = libraryWriter.toJson(library);
-            System.out.println(testLibrary);
+           // String testLibrary = libraryWriter.toJson(library);
+            //System.out.println(testLibrary);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,16 +42,19 @@ public class CardReaderWriter {
     }
 
     public HashMap<String, Card> readLibrary(String path, Type type) {
+        HashMap<String, Card> clonedLibrary = new HashMap<>();
         try {
             FileReader reader = new FileReader(path);
-            HashMap<String, Card> clonedLibrary = libraryWriter.fromJson(reader, type);
-            System.out.println(clonedLibrary);
+            clonedLibrary = libraryWriter.fromJson(reader, type);
+          //  System.out.println(clonedLibrary);
             return clonedLibrary;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return null;
+        return clonedLibrary;
     }
+
+
 
 }
 
