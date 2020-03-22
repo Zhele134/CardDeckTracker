@@ -1,22 +1,7 @@
 {
   "deckLimit": 30,
-  "dustCost": 2560,
+  "dustCost": 960,
   "deck": {
-    "Wardruid Loti": {
-      "theCard": {
-        "type": "Minion",
-        "name": "Wardruid Loti",
-        "cost": 3,
-        "description": "Choose One - Transform into one of Loti\u0027s four dinosaur forms",
-        "gameClass": "druid",
-        "rarity": "Legendary",
-        "tribe": "",
-        "attack": 1,
-        "health": 2,
-        "rewardCost": 0
-      },
-      "copies": 1
-    },
     "Innervate": {
       "theCard": {
         "type": "Spell",

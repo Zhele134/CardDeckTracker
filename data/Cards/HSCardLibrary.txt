@@ -1,4 +1,26 @@
 {
+  "q": {
+    "type": "Weapon",
+    "name": "q",
+    "cost": 2,
+    "description": "q",
+    "gameClass": "q",
+    "rarity": "e",
+    "attack": 2,
+    "health": 2,
+    "rewardCost": 0
+  },
+  "a": {
+    "type": "Weapon",
+    "name": "a",
+    "cost": 2,
+    "description": "a",
+    "gameClass": "a",
+    "rarity": "a",
+    "attack": 2,
+    "health": 2,
+    "rewardCost": 0
+  },
   "Wardruid Loti": {
     "type": "Minion",
     "name": "Wardruid Loti",
@@ -67,6 +89,17 @@
     "tribe": "",
     "attack": 3,
     "health": 5,
+    "rewardCost": 0
+  },
+  "Puzzle Box of Yogg\u0027Saron": {
+    "type": "Spell",
+    "name": "Puzzle Box of Yogg\u0027Saron",
+    "cost": 10,
+    "description": "Cast 10 Random Spells (at random targets)",
+    "gameClass": "",
+    "rarity": "Epic",
+    "attack": 0,
+    "health": 0,
     "rewardCost": 0
   }
 }
