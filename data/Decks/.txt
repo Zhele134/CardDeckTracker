@@ -1,0 +1,5 @@
+{
+  "deckLimit": 30,
+  "dustCost": 0,
+  "deck": {}
+}

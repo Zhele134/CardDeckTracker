@@ -14,6 +14,10 @@ import com.google.gson.reflect.TypeToken;
 import model.*;
 import persistence.*;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
+
 public class CardGUI implements ActionListener, ItemListener {
 
     private JButton makeCardButton;

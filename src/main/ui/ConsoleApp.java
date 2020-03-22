@@ -458,7 +458,7 @@ public class ConsoleApp {
 
     private void loadDeck() {
         Type type = new TypeToken<Deck>() {}.getType();
-        File startingPath = new File("C:\\Users\\roxas\\CPSC210\\PROJECT\\TermProject_h0w2b\\data\\Decks");
+        File startingPath = new File("./data/Decks");
 
         JFileChooser deckChoice = new JFileChooser();
         deckChoice.setFileSelectionMode(JFileChooser.FILES_ONLY);
