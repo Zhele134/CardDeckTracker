@@ -66,8 +66,6 @@ public class CardGUI implements ActionListener, ItemListener {
     private JTextField heroPowerDescField;
 
 
-
-
     private HashMap<String, Card> library = new HashMap<>();
     private CardReaderWriter cardReaderWriter;
     private static final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
@@ -101,7 +99,8 @@ public class CardGUI implements ActionListener, ItemListener {
 
     private void initializeFields() {
         cardReaderWriter = new CardReaderWriter();
-        Type type = new TypeToken<HashMap<String, Card>>() {}.getType();
+        Type type = new TypeToken<HashMap<String, Card>>() {
+        }.getType();
         library = cardReaderWriter.readLibrary(HS_CARD_LIBRARY, type);
     }
 
@@ -324,7 +323,6 @@ public class CardGUI implements ActionListener, ItemListener {
     }
 
 
-
     private JPanel makeHeroPanel() {
         JPanel makeHeroPanel = new JPanel();
         makeHeroPanel.setLayout(new GridLayout(0, 2));
@@ -394,22 +392,21 @@ public class CardGUI implements ActionListener, ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        CardLayout cl = (CardLayout)(cards.getLayout());
-        cl.show(cards, (String)e.getItem());
+        CardLayout cl = (CardLayout) (cards.getLayout());
+        cl.show(cards, (String) e.getItem());
     }
 
     private JButton confirmStats() {
         JButton confirmStats = new JButton("Confirm Stats");
         confirmStats.addActionListener(e -> {
             playSound(clickSound);
-            type = (String)selectTypeBox.getSelectedItem();
+            type = (String) selectTypeBox.getSelectedItem();
 
             try {
                 if (type == "Minion") {
                     setMinionStats();
                 } else if (type.equals("Spell")) {
                     setSpellStats();
-
                 } else if (type.equals("Weapon")) {
                     setWeaponStats();
 
@@ -417,15 +414,19 @@ public class CardGUI implements ActionListener, ItemListener {
                     setHeroStats();
                 }
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(makeCardWindow, "Please insert an integer for Cost, Attack, "
-                        + "Health, Durability, Armor Gain, or Hero Power Cost values", "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                showErrorDialog();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(makeCardWindow, "Something went wrong!", "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
         });
         return confirmStats;
+    }
+
+    private void showErrorDialog() {
+        JOptionPane.showMessageDialog(makeCardWindow, "Please insert an integer for Cost, Attack, "
+                        + "Health, Durability, Armor Gain, or Hero Power Cost values", "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 
     public void setMinionStats() {
