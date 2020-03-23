@@ -25,6 +25,7 @@ public class DeckGUI implements ActionListener {
     private CardReaderWriter cardReaderWriter;
     private DeckReaderWriter deckReaderWriter;
     private static final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
+    private static final String clickSound = "./data/Sounds/clickSound.wav";
 
     private JTextArea deckText;
     private JButton addCard;
@@ -43,6 +44,7 @@ public class DeckGUI implements ActionListener {
     private JTextField addCardTextField;
     private JTextField addCardCopiesTextField;
     private JFrame addCardFrame;
+
 
     public DeckGUI() {
         makeDeckGUI();
@@ -136,12 +138,16 @@ public class DeckGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveDeck) {
+            playSound(clickSound);
             saveDeck();
         } else if (e.getSource() == loadDeck) {
+            playSound(clickSound);
             loadDeck();
         } else if (e.getSource() == addCard) {
+            playSound(clickSound);
             addCard();
         } else if (e.getSource() == removeCard) {
+            playSound(clickSound);
             removeCard();
         }
 
@@ -195,23 +201,27 @@ public class DeckGUI implements ActionListener {
 
     private void addAddCardListener(JButton addCardButton) {
         addCardButton.addActionListener(e -> {
-            String cardName = addCardTextField.getText();
-            int cardCopies = getIntegerValue(addCardCopiesTextField.getText());
-
-            if (library.containsKey(cardName)) {
-                if (deck.addCard(library.get(cardName), cardCopies)) {
-                    JOptionPane.showMessageDialog(addCardFrame, "Card added successfully");
-                    updateDeckText();
+            try {
+                playSound(clickSound);
+                String cardName = addCardTextField.getText();
+                int cardCopies = getIntegerValue(addCardCopiesTextField.getText());
+                if (library.containsKey(cardName)) {
+                    if (deck.addCard(library.get(cardName), cardCopies)) {
+                        JOptionPane.showMessageDialog(addCardFrame, "Card added successfully");
+                        updateDeckText();
+                    } else {
+                        JOptionPane.showMessageDialog(addCardFrame, "Too many copies "
+                                + "(2 max, 1 only for legendaries)", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(addCardFrame, "Too many copies "
-                            + "(2 max, 1 only for legendaries)", "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(addCardFrame, "Card not found in library", "Warning",
+                            JOptionPane.WARNING_MESSAGE);
                 }
-            } else {
-                JOptionPane.showMessageDialog(addCardFrame, "Card not found in library", "Warning",
-                        JOptionPane.WARNING_MESSAGE);
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(addCardFrame, "Insert an integer for the copies value",
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-
     }
 
     private int getIntegerValue(String s) {
@@ -252,6 +262,7 @@ public class DeckGUI implements ActionListener {
         removeCardButton.addActionListener(e -> {
             String cardName = removeCardTextField.getText();
             try {
+                playSound(clickSound);
                 if (library.containsKey(cardName)) {
                     deck.removeCard(library.get(cardName));
                     updateDeckText();
@@ -307,6 +318,7 @@ public class DeckGUI implements ActionListener {
 
     private void addSaveListener(JButton saveDeckButton) {
         saveDeckButton.addActionListener(e -> {
+            playSound(clickSound);
             //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             String saveDummy = "./data/Decks/";
             String deckName = saveTextField.getText();
@@ -360,6 +372,19 @@ public class DeckGUI implements ActionListener {
         deckText.append("Deck " + "\r\n" + "" + "\r\n");
         for (CardInDeck card : deck.retrieveCards()) {
             deckText.append((card.getCard().getName() + " x " + card.getCopies()) + "\r\n");
+        }
+    }
+
+    //http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
+    public void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
         }
     }
 }

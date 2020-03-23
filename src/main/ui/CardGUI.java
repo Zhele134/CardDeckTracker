@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -26,6 +27,8 @@ public class CardGUI implements ActionListener, ItemListener {
 
     private JPanel cards;
     private JComboBox selectTypeBox;
+
+    private JFrame makeCardWindow;
 
     private String type;
     private JTextField minionClassField;
@@ -68,6 +71,8 @@ public class CardGUI implements ActionListener, ItemListener {
     private HashMap<String, Card> library = new HashMap<>();
     private CardReaderWriter cardReaderWriter;
     private static final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
+    private static final String clickSound = "./data/Sounds/clickSound.wav";
+    private static final String createSound = "./data/Sounds/createSound.wav";
 
     public CardGUI() {
         initialize();
@@ -142,11 +147,13 @@ public class CardGUI implements ActionListener, ItemListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == makeCardButton) {
+            playSound(clickSound);
             makeTheMakeCardWindow();
-
         } else if (e.getSource() == saveLibrary) {
+            playSound(clickSound);
             saveCardLibrary();
         } else if (e.getSource() == viewLibrary) {
+            playSound(clickSound);
             viewLibrary();
         }
     }
@@ -192,7 +199,7 @@ public class CardGUI implements ActionListener, ItemListener {
     }
 
     private void makeTheMakeCardWindow() {
-        JFrame makeCardWindow = new JFrame("Making Card");
+        makeCardWindow = new JFrame("Making Card");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setMakeCardWindowSize(makeCardWindow, screenSize);
 
@@ -328,7 +335,7 @@ public class CardGUI implements ActionListener, ItemListener {
         makeHeroPanel.add(heroCostField);
         makeHeroPanel.add(new JLabel("Name: "));
         makeHeroPanel.add(heroNameField);
-        makeHeroPanel.add(new JLabel("Armor: "));
+        makeHeroPanel.add(new JLabel("Armor Gain Amount: "));
         makeHeroPanel.add(heroHealthField);
         makeHeroPanel.add(new JLabel("Description: "));
         makeHeroPanel.add(heroDescField);
@@ -394,21 +401,29 @@ public class CardGUI implements ActionListener, ItemListener {
     private JButton confirmStats() {
         JButton confirmStats = new JButton("Confirm Stats");
         confirmStats.addActionListener(e -> {
+            playSound(clickSound);
             type = (String)selectTypeBox.getSelectedItem();
-            //System.out.println(type);
 
-            if (type == "Minion") {
-                setMinionStats();
-            } else if (type.equals("Spell")) {
-                setSpellStats();
+            try {
+                if (type == "Minion") {
+                    setMinionStats();
+                } else if (type.equals("Spell")) {
+                    setSpellStats();
 
-            } else if (type.equals("Weapon")) {
-                setWeaponStats();
+                } else if (type.equals("Weapon")) {
+                    setWeaponStats();
 
-            } else if (type.equals("Hero Card")) {
-                setHeroStats();
+                } else if (type.equals("Hero Card")) {
+                    setHeroStats();
+                }
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(makeCardWindow, "Please insert an integer for Cost, Attack, "
+                        + "Health, Durability, Armor Gain, or Hero Power Cost values", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(makeCardWindow, "Something went wrong!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
-
         });
         return confirmStats;
     }
@@ -434,8 +449,7 @@ public class CardGUI implements ActionListener, ItemListener {
         String tribe = minionTribeField.getText();
         minion.setTribe(tribe);
 
-
-        printMinionStats(minion);
+        JOptionPane.showMessageDialog(makeCardWindow, "Card made successfully");
         library.put(minion.getName(), minion);
     }
 
@@ -454,7 +468,7 @@ public class CardGUI implements ActionListener, ItemListener {
         String rarity = spRarityField.getText();
         spell.setRarity(rarity);
 
-        printSpellStats(spell);
+        JOptionPane.showMessageDialog(makeCardWindow, "Card made successfully");
         library.put(spell.getName(), spell);
     }
 
@@ -477,7 +491,7 @@ public class CardGUI implements ActionListener, ItemListener {
         int health = getIntegerValue(weaponHealthField.getText());
         weapon.setHealth(health);
 
-        printWeaponStats(weapon);
+        JOptionPane.showMessageDialog(makeCardWindow, "Card made successfully");
         library.put(weapon.getName(), weapon);
     }
 
@@ -501,60 +515,26 @@ public class CardGUI implements ActionListener, ItemListener {
         String heroPowerDesc = heroPowerDescField.getText();
         hero.setRewardDesc(heroPowerDesc);
 
-        printHeroStats(hero);
+        JOptionPane.showMessageDialog(makeCardWindow, "Card made successfully");
         library.put(hero.getName(), hero);
 
     }
 
-    private void printMinionStats(Card card) {
-        System.out.println("Type: " + card.getType());
-        System.out.println("Class: " + card.getGameClass());
-        System.out.println("Name: " + card.getName());
-        System.out.println("Cost: " + card.getCost());
-        System.out.println("Attack: " + card.getAttack());
-        System.out.println("Health: " + card.getHealth());
-        System.out.println("Description: " + card.getDesc());
-        System.out.println("Tribe: " + card.getTribe());
-        System.out.println("Rarity: " + card.getRarity());
-    }
-
-    //EFFECT: prints spell stats
-    private void printSpellStats(Card card) {
-        System.out.println("Type: " + card.getType());
-        System.out.println("Class: " + card.getGameClass());
-        System.out.println("Name: " + card.getName());
-        System.out.println("Cost: " + card.getCost());
-        System.out.println("Description: " + card.getDesc());
-        System.out.println("Rarity: " + card.getRarity());
-    }
-
-    //EFFECT: prints weapon stats
-    private void printWeaponStats(Card card) {
-        System.out.println("Type: " + card.getType());
-        System.out.println("Class: " + card.getGameClass());
-        System.out.println("Name: " + card.getName());
-        System.out.println("Cost: " + card.getCost());
-        System.out.println("Attack: " + card.getAttack());
-        System.out.println("Durability: " + card.getHealth());
-        System.out.println("Description: " + card.getDesc());
-        System.out.println("Rarity: " + card.getRarity());
-    }
-
-    //EFFECT: prints hero card stats
-    private void printHeroStats(Card card) {
-        System.out.println("Type: " + card.getType());
-        System.out.println("Class: " + card.getGameClass());
-        System.out.println("Name: " + card.getName());
-        System.out.println("Cost: " + card.getCost());
-        System.out.println("Armor: " + card.getHealth());
-        System.out.println("Description: " + card.getDesc());
-        System.out.println("Hero Power Description: " + card.getRewardDesc());
-        System.out.println("Hero Power Cost: " + card.getRewardCost());
-        System.out.println("Rarity: " + card.getRarity());
-    }
-
     private int getIntegerValue(String s) {
         return "".equals(s) ? 0 : Integer.parseInt(s);
+    }
+
+    //http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
+    public void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
     }
 
 

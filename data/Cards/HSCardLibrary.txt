@@ -1,26 +1,4 @@
 {
-  "q": {
-    "type": "Weapon",
-    "name": "q",
-    "cost": 2,
-    "description": "q",
-    "gameClass": "q",
-    "rarity": "e",
-    "attack": 2,
-    "health": 2,
-    "rewardCost": 0
-  },
-  "a": {
-    "type": "Weapon",
-    "name": "a",
-    "cost": 2,
-    "description": "a",
-    "gameClass": "a",
-    "rarity": "a",
-    "attack": 2,
-    "health": 2,
-    "rewardCost": 0
-  },
   "Wardruid Loti": {
     "type": "Minion",
     "name": "Wardruid Loti",
@@ -31,6 +9,18 @@
     "tribe": "",
     "attack": 1,
     "health": 2,
+    "rewardCost": 0
+  },
+  "Murloc Knight": {
+    "type": "Minion",
+    "name": "Murloc Knight",
+    "cost": 4,
+    "description": "Inspire: Summon a random Murloc",
+    "gameClass": "Paladin",
+    "rarity": "Common",
+    "tribe": "Murloc",
+    "attack": 3,
+    "health": 4,
     "rewardCost": 0
   },
   "Oasis Surger": {

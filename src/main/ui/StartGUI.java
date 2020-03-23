@@ -15,9 +15,10 @@ import javax.swing.*;
 
 public class StartGUI implements ActionListener {
 
-    private static final Insets insets = new Insets(0,0,0,0);
+    private static final Insets insets = new Insets(0, 0, 0, 0);
     private JButton cardButton;
     private JButton deckButton;
+    private static final String clickSound = "./data/Sounds/clickSound.wav";
 
     public StartGUI() {
         initialize();
@@ -45,7 +46,6 @@ public class StartGUI implements ActionListener {
 
 
         startWindow.setContentPane(buttonPane);
-
 
 
         startWindow.pack();
@@ -78,21 +78,27 @@ public class StartGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cardButton) {
+            playSound(clickSound);
             new CardGUI();
         } else if (e.getSource() == deckButton) {
+            playSound(clickSound);
             new DeckGUI();
         }
 
     }
 
-//    //http://www.java2s.com/Tutorial/Java/0240__Swing/UsingGridBagConstraints.htm
-//    private static void addComponent(Container container, Component component, int gridx, int gridy,
-//                                     int gridwidth, int gridheight, int anchor, int fill) {
-//        GridBagConstraints gbc = new GridBagConstraints(gridx, gridy, gridwidth, gridheight, 1.0, 1.0,
-//                anchor, fill, insets, 0, 0);
-//        container.add(component, gbc);
-//    }
-
+    //http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
+    public void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
 }
 
 

@@ -1,0 +1,49 @@
+{
+  "deckLimit": 30,
+  "dustCost": 960,
+  "deck": {
+    "Innervate": {
+      "theCard": {
+        "type": "Spell",
+        "name": "Innervate",
+        "cost": 0,
+        "description": "Gain 1 mana crystal this turn only.",
+        "gameClass": "druid",
+        "rarity": "Common",
+        "attack": 0,
+        "health": 0,
+        "rewardCost": 0
+      },
+      "copies": 2
+    },
+    "Rising Winds": {
+      "theCard": {
+        "type": "Spell",
+        "name": "Rising Winds",
+        "cost": 2,
+        "description": "Twinspell Choose One - Draw a card; or Summon a 3/2 Eagle.",
+        "gameClass": "druid",
+        "rarity": "Common",
+        "attack": 0,
+        "health": 0,
+        "rewardCost": 0
+      },
+      "copies": 2
+    },
+    "Crystal Merchant": {
+      "theCard": {
+        "type": "Minion",
+        "name": "Crystal Merchant",
+        "cost": 2,
+        "description": "If you have any unspent mana at the end of your turn, draw a card.",
+        "gameClass": "druid",
+        "rarity": "Epic",
+        "tribe": "",
+        "attack": 1,
+        "health": 4,
+        "rewardCost": 0
+      },
+      "copies": 2
+    }
+  }
+}
