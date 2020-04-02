@@ -23,6 +23,7 @@ public class CardReaderWriter {
 
     }
 
+    //Effect: Save card library to desired location
     public void saveLibrary(HashMap library, String path) {
         try {
             FileWriter file = new FileWriter(path);
@@ -32,21 +33,18 @@ public class CardReaderWriter {
             file.flush();
             file.close();
 
-           // String testLibrary = libraryWriter.toJson(library);
-            //System.out.println(testLibrary);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
+    //EFFECT: Loads the library from the desired location
     public HashMap<String, Card> readLibrary(String path, Type type) {
         HashMap<String, Card> clonedLibrary = new HashMap<>();
         try {
             FileReader reader = new FileReader(path);
             clonedLibrary = libraryWriter.fromJson(reader, type);
-          //  System.out.println(clonedLibrary);
             return clonedLibrary;
         } catch (FileNotFoundException e) {
             e.printStackTrace();

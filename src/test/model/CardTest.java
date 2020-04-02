@@ -1,7 +1,12 @@
 package model;
 
+import com.google.gson.reflect.TypeToken;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {
@@ -137,6 +142,17 @@ class CardTest {
 
         assertEquals(null, hero.getAttack());
         assertEquals(null, hero.getTribe());
+    }
+
+    @Test
+    void testType() {
+        Type type1 = new TypeToken<HashMap<String, Card>>() {
+        }.getType();
+        assertEquals("java.util.HashMap<java.lang.String, model.Card>", type1.getTypeName());
+
+        Type type2 = new TypeToken<Deck>() {
+        }.getType();
+        assertEquals("model.Deck", type2.getTypeName());
     }
 
 

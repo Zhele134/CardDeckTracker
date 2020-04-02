@@ -1,0 +1,64 @@
+{
+  "deckLimit": 30,
+  "dustCost": 1040,
+  "deck": {
+    "Oasis Surger": {
+      "theCard": {
+        "type": "Minion",
+        "name": "Oasis Surger",
+        "cost": 5,
+        "description": "Rush, Choose One - Gain +2/+2 or Summon a copy of this minion.",
+        "gameClass": "druid",
+        "rarity": "Common",
+        "tribe": "Elemental",
+        "attack": 3,
+        "health": 3,
+        "rewardCost": 0
+      },
+      "copies": 2
+    },
+    "Innervate": {
+      "theCard": {
+        "type": "Spell",
+        "name": "Innervate",
+        "cost": 0,
+        "description": "Gain 1 mana crystal this turn only.",
+        "gameClass": "druid",
+        "rarity": "Common",
+        "attack": 0,
+        "health": 0,
+        "rewardCost": 0
+      },
+      "copies": 2
+    },
+    "Rising Winds": {
+      "theCard": {
+        "type": "Spell",
+        "name": "Rising Winds",
+        "cost": 2,
+        "description": "Twinspell Choose One - Draw a card; or Summon a 3/2 Eagle.",
+        "gameClass": "druid",
+        "rarity": "Common",
+        "attack": 0,
+        "health": 0,
+        "rewardCost": 0
+      },
+      "copies": 2
+    },
+    "Anubisath Defender": {
+      "theCard": {
+        "type": "Minion",
+        "name": "Anubisath Defender",
+        "cost": 5,
+        "description": "Taunt. Costs (0) if you\u0027ve cast a spell that costs (5) or more this turn.",
+        "gameClass": "druid",
+        "rarity": "Epic",
+        "tribe": "",
+        "attack": 3,
+        "health": 5,
+        "rewardCost": 0
+      },
+      "copies": 2
+    }
+  }
+}

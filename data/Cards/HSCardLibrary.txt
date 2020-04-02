@@ -11,6 +11,17 @@
     "health": 2,
     "rewardCost": 0
   },
+  "Deep Freeze": {
+    "type": "Spell",
+    "name": "Deep Freeze",
+    "cost": 8,
+    "description": "Freeze an enemy. Summon two 3/6 Water Elementals.",
+    "gameClass": "Mage",
+    "rarity": "Rare",
+    "attack": 0,
+    "health": 0,
+    "rewardCost": 0
+  },
   "Murloc Knight": {
     "type": "Minion",
     "name": "Murloc Knight",
@@ -20,6 +31,18 @@
     "rarity": "Common",
     "tribe": "Murloc",
     "attack": 3,
+    "health": 4,
+    "rewardCost": 0
+  },
+  "Valdris Felgorge": {
+    "type": "Minion",
+    "name": "Valdris Felgorge",
+    "cost": 7,
+    "description": "Battlecry: Increase your hand size to 12. Draw 4 cards.",
+    "gameClass": "Warlock",
+    "rarity": "Legendary",
+    "tribe": "",
+    "attack": 4,
     "health": 4,
     "rewardCost": 0
   },

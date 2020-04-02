@@ -56,8 +56,6 @@ public class Deck {
                     deck.put(card.getName(), cardInDeck);
                     dustCost = dustCost + dustForCard(cardInDeck.getCard().getRarity()) * cardInDeck.getCopies();
                     return true;
-                    //System.out.println("Cards added successfully, there are now " + countDeckSize() + "
-                    // cards in deck");
 
                 } else {
                     //Can't add that many of that card to deck

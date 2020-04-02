@@ -7,7 +7,7 @@ import model.*;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.*;
+
 
 public class DeckReaderWriter {
 
@@ -20,6 +20,7 @@ public class DeckReaderWriter {
         deckReaderWriter = new GsonBuilder().setPrettyPrinting().create();
     }
 
+    //EFFECT: Save deck to desired location
     public void saveDeck(Deck deck, String path) {
         try {
             FileWriter file = new FileWriter(path);
@@ -33,6 +34,7 @@ public class DeckReaderWriter {
         }
     }
 
+    //EFFECT: load deck from desired location
     public Deck readDeck(String path, Type type) {
         Deck clonedDeck = new Deck();
         try {

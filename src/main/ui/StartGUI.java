@@ -1,29 +1,20 @@
 package ui;
 
-
-import net.miginfocom.swing.MigLayout;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.AudioSystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 
-public class StartGUI implements ActionListener {
+public class StartGUI extends PlaySound implements ActionListener {
 
-    private static final Insets insets = new Insets(0, 0, 0, 0);
     private JButton cardButton;
     private JButton deckButton;
-    private static final String clickSound = "./data/Sounds/clickSound.wav";
 
     public StartGUI() {
         initialize();
     }
 
+    //EFFECT: Make Starting menu
     private void initialize() {
         JFrame startWindow = new JFrame("Start");
         startWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,6 +50,7 @@ public class StartGUI implements ActionListener {
 
     }
 
+    //EFFECT: Make the "Card" button
     private JButton makeCardButton() {
         JButton cardButton = new JButton("Edit Cards");
         cardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -67,6 +59,7 @@ public class StartGUI implements ActionListener {
         return cardButton;
     }
 
+    //EFFECT: Make the "Deck" button
     private JButton makeDeckButton() {
         JButton deckButton = new JButton("Edit Decks");
         deckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -75,6 +68,7 @@ public class StartGUI implements ActionListener {
         return deckButton;
     }
 
+    //EFFECT: If cardButton pressed, open the CardGUI. If deckButton pressed, open the DeckGUI.
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cardButton) {
@@ -85,19 +79,6 @@ public class StartGUI implements ActionListener {
             new DeckGUI();
         }
 
-    }
-
-    //http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
-    public void playSound(String soundName) {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-        }
     }
 }
 

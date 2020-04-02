@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
@@ -12,20 +11,13 @@ import com.google.gson.reflect.TypeToken;
 import model.Deck;
 import model.Card;
 import model.CardInDeck;
-import persistence.*;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.AudioSystem;
 
-public class DeckGUI implements ActionListener {
+public class DeckGUI extends PlaySound implements ActionListener {
 
     private Deck deck;
     private HashMap<String, Card> library = new HashMap<>();
-    private CardReaderWriter cardReaderWriter;
-    private DeckReaderWriter deckReaderWriter;
     private static final String HS_CARD_LIBRARY = "./data/Cards/HSCardLibrary.txt";
-    private static final String clickSound = "./data/Sounds/clickSound.wav";
 
     private JTextArea deckText;
     private JButton addCard;
@@ -37,13 +29,13 @@ public class DeckGUI implements ActionListener {
     private JButton removeCardButton;
     private JTextField removeCardTextField;
 
-    private JTextField saveTextField;
-    private JButton saveDeckButton;
-    private JFrame saveDeckFrame;
     private JButton addCardButton;
+
     private JTextField addCardTextField;
     private JTextField addCardCopiesTextField;
     private JFrame addCardFrame;
+
+    private SaveAndLoad saveAndLoad;
 
 
     public DeckGUI() {
@@ -58,17 +50,14 @@ public class DeckGUI implements ActionListener {
 
         deckWindow.add(makeDeckButtons(), BorderLayout.LINE_START);
         deckWindow.add(makeDeckText(), BorderLayout.CENTER);
-
-
     }
 
     public void initializeFields() {
         deck = new Deck();
-        cardReaderWriter = new CardReaderWriter();
+        saveAndLoad = new SaveAndLoad();
         Type type = new TypeToken<HashMap<String, Card>>() {
         }.getType();
-        library = cardReaderWriter.readLibrary(HS_CARD_LIBRARY, type);
-        deckReaderWriter = new DeckReaderWriter();
+        library = saveAndLoad.loadLibrary(HS_CARD_LIBRARY, type);
     }
 
     private void setDeckWindowSize(JFrame deckWindow, Dimension screenSize) {
@@ -139,10 +128,11 @@ public class DeckGUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveDeck) {
             playSound(clickSound);
-            saveDeck();
+            saveAndLoad.makeSaveDeckGUI(deck);
         } else if (e.getSource() == loadDeck) {
             playSound(clickSound);
-            loadDeck();
+            deck = saveAndLoad.loadDeck();
+            updateDeckText();
         } else if (e.getSource() == addCard) {
             playSound(clickSound);
             addCard();
@@ -224,6 +214,8 @@ public class DeckGUI implements ActionListener {
         });
     }
 
+    //EFFECT: parses an Integer from a text field
+    //https://stackoverflow.com/questions/41410863/numberformat-exception-for-converting-jtextfield-to-int/41410915#41410915
     private int getIntegerValue(String s) {
         return "".equals(s) ? 0 : Integer.parseInt(s);
     }
@@ -278,113 +270,12 @@ public class DeckGUI implements ActionListener {
         });
     }
 
-
-    public void saveDeck() {
-        saveDeckFrame = new JFrame();
-        JPanel saveDeckLabel = new JPanel();
-        setSaveDeckSize(saveDeckFrame);
-
-        JLabel nameLabel = new JLabel("Choose a name for your deck");
-        nameLabel.setFont(new Font("Arial", Font.PLAIN, 40));
-        saveDeckLabel.add(nameLabel);
-
-        JPanel saveDeckComponents = makeSaveDeckComponents();
-
-        saveDeckFrame.add(saveDeckLabel, BorderLayout.PAGE_START);
-        saveDeckFrame.add(saveDeckComponents, BorderLayout.CENTER);
-
-    }
-
-    private void setSaveDeckSize(JFrame saveDeckFrame) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        saveDeckFrame.setSize(screenSize.width * 2 / 7, screenSize.height * 2 / 15);
-        saveDeckFrame.setLocationRelativeTo(null);
-        saveDeckFrame.setVisible(true);
-    }
-
-    private JPanel makeSaveDeckComponents() {
-        JPanel saveDeckComponents = new JPanel();
-        saveDeckComponents.setLayout(new GridLayout(1, 2));
-        saveTextField = new JTextField(50);
-        saveTextField.setFont(new Font("Arial", Font.PLAIN, 30));
-        saveDeckComponents.add(saveTextField);
-
-        saveDeckButton = new JButton("Save Deck");
-        saveDeckButton.setFont(new Font("Arial", Font.PLAIN, 25));
-        addSaveListener(saveDeckButton);
-        saveDeckComponents.add(saveDeckButton);
-        return saveDeckComponents;
-    }
-
-    private void addSaveListener(JButton saveDeckButton) {
-        saveDeckButton.addActionListener(e -> {
-            playSound(clickSound);
-            //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            String saveDummy = "./data/Decks/";
-            String deckName = saveTextField.getText();
-            deckName.replaceAll(" ", "_");
-            saveDummy = saveDummy + deckName + ".txt";
-            deckReaderWriter.saveDeck(deck, saveDummy);
-            JOptionPane.showMessageDialog(saveDeckFrame, "Deck saved successfully!");
-            saveDeckFrame.dispose();
-
-//            JFrame confirmSave = new JFrame();
-//            confirmSave.setSize(screenSize.width * 2 / 30, screenSize.height * 2 / 50);
-//            confirmSave.setLocationRelativeTo(null);
-//            confirmSave.setVisible(true);
-//
-//            JPanel confirmSavePanel = new JPanel();
-//            confirmSavePanel.setLayout(new GridLayout(0, 1));
-//            JLabel confirmSaveLabel = new JLabel("Save successful!");
-//            confirmSaveLabel.setFont(new Font("Arial", Font.PLAIN, 40));
-//            confirmSavePanel.add(confirmSaveLabel);
-//            //confirmSavePanel.setSize(screenSize.width * 2 / 35, screenSize.height * 2 / 55);
-//
-//
-//            confirmSave.setContentPane(confirmSavePanel)
-
-        });
-    }
-
-    public void loadDeck() {
-        Type type = new TypeToken<Deck>() {
-        }.getType();
-        File startingPath = new File("./data/Decks");
-        JFileChooser deckChoice = new JFileChooser();
-        deckChoice.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        JDialog window = new JDialog((Window) null);
-        window.setLocationRelativeTo(null);
-        window.setFont(new Font("Arial", Font.PLAIN, 30));
-
-
-        deckChoice.setCurrentDirectory(startingPath);
-        deckChoice.showOpenDialog(window);
-        String name = deckChoice.getSelectedFile().getName();
-
-        String deckName = "./data/Decks/" + name;
-        deck = deckReaderWriter.readDeck(deckName, type);
-        updateDeckText();
-
-    }
-
-    private void updateDeckText() {
+    public void updateDeckText() {
         deckText.setText("");
         deckText.append("Deck " + "\r\n" + "" + "\r\n");
         for (CardInDeck card : deck.retrieveCards()) {
             deckText.append((card.getCard().getName() + " x " + card.getCopies()) + "\r\n");
         }
-    }
-
-    //http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
-    public void playSound(String soundName) {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-        }
+        deckText.append("\r\n\r\n This deck will cost " + deck.getDustCost() + " to make.");
     }
 }

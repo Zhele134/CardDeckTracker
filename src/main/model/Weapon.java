@@ -28,9 +28,7 @@ public class Weapon extends Card {
         return health;
     }
 
-    /*
-    -----------------------------------------------------------------------------------------------------------------
-     */
+
     @Override
     public void setTribe(String tribe) {
         System.out.println("Can't set this");

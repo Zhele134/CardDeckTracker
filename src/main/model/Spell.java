@@ -7,9 +7,6 @@ public class Spell extends Card {
         this.type = "Spell";
     }
 
-    /*
-    -----------------------------------------------------------------------------------------------------------------
-     */
     @Override
     public void setAttack(int attack) {
         System.out.println("Can't set this");

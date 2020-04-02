@@ -28,21 +28,11 @@ can make it easier to draft up concepts of these cards, allowing me to contribut
 - As a user, I want to be able to save my cards, and load them to use again later.
 - As a user, I want to be able to save my decks, and load them to edit later. 
 
-#Instructions for Grader
+#Phase 4: Task 2
+- The map interface is found in the Deck class in the model package, as well as CardGUI, DeckGUI, and SaveAndLoad in
+the UI packages. 
 
-- You can generate the first required event by adding a card to your card library. First, click "Edit Cards", then
-"Make a Card". Enter some values into the fields then click "Confirm Stats". Afterwards, go back and click "View Card
-Library" and the name of your card should appear within the list.
-
-- You can generate the second required event by removing a card from your deck. First, click "Edit Decks", then
-"Load Deck" and select one of the decks. If that doesn't work, add some cards to your deck by clicking "Add Card", 
-then typing in the names of some of the cards in the library. Afterwards, you can remove a card by clicking "Remove Card",
-where you enter the name of the card you want to remove within the deck. 
-
-- You can trigger my audio component by clicking any button within the application.
-
-- You can save the state of my application by clicking "Save Card Library" in the Card portion, or "Save Deck" in the 
-Deck portion.
-
-- You can reload the state of the application in the Deck portion by clicking "Load Deck" and selecting one of the 
-Quest Druid Decks. 
+#Phase 4: Task 3
+- Moved the MakeCardGUI functionality in CardGUI to another class to increase cohesion. 
+- Moved saving and loading functionality from both CardGUI and DeckGUI to another class to increase cohesion.
+- Made PlaySound into a superclass that all GUI classes extend to decrease coupling and increase cohesion.
